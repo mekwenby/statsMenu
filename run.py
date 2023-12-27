@@ -15,9 +15,9 @@ from app import app
 
 def run(MULTI_PROCESS):
     if MULTI_PROCESS == False:
-        WSGIServer(('0.0.0.0', 8080), app).serve_forever()
+        WSGIServer(('0.0.0.0', 12380), app).serve_forever()
     else:
-        mulserver = WSGIServer(('0.0.0.0', 8080), app)
+        mulserver = WSGIServer(('0.0.0.0', 12380), app)
         mulserver.start()
 
         def server_forever():
@@ -30,7 +30,7 @@ def run(MULTI_PROCESS):
 
 
 if __name__ == "__main__":
-    # 单进程 + 协程
-    #run(False)
-    # 多进程 + 协程
+    # 单进程 + 协程 适应 Windows
+    # run(False)
+    # 多进程 + 协程 适应 Linux
     run(True)
