@@ -1,0 +1,14 @@
+name: 抖音
+genre: link
+serial: 5
+value: 'https://www.douyin.com/'
+ico_genre: 'image'
+ico_size: 1
+ico_value: 'douyin.png'
+
+# name        应用名称
+# genre       应用类型,目前只支持link
+# value       link  的值
+# ico_genre   图标类型 支持 text 和 image
+# ico_size    图标大小 支持 1 或者 2
+# ico_value   图标的值 支持文本或者 图标名称

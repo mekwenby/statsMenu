@@ -1,0 +1,275 @@
+.fixed-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 6vh;
+    box-shadow: 0px -3px 3px rgba(0, 0, 0, 0.5);
+    background-color: #f8f9fa;
+}
+
+
+#buttons {
+    height: 6vh;
+    font-size: 5vh;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+#element {
+    width: 80px;
+    height: 80px;
+    background-color: green;
+    margin: 2px;
+    opacity: 0.9;
+}
+
+#row {
+    display: flex;
+    justify-content: center;
+    align-items: left;
+}
+
+#element2-1 {
+    width: 80px;
+    height: 164px;
+    background-color: green;
+    margin: 2px;
+    opacity: 0.9;
+}
+
+#element1-2 {
+    width: 164px;
+    height: 80px;
+    background-color: green;
+    margin: 2px;
+    opacity: 0.9;
+}
+
+.element1-2 {
+    width: 164px;
+    height: 80px;
+    background-color: green;
+    margin: 2px;
+    opacity: 0.9;
+}
+
+#element1-3 {
+    width: 248px;
+    height: 80px;
+    background-color: green;
+    margin: 2px;
+    opacity: 0.9;
+}
+
+#element1-4 {
+    width: 332px;
+    height: 80px;
+    background-color: green;
+    margin: 2px;
+    opacity: 0.9;
+}
+
+.manege_app {
+    width: 332px;
+    height: 80px;
+    background-color: green;
+    margin: 2px;
+    opacity: 0.9;
+}
+
+.manage_app_info {
+    width: 310px;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    margin-left: 2px;
+    align-items: flex-end;
+}
+
+.up_wall_div {
+    width: 100px;
+    height: 200px;
+    background-color: green;
+    margin: 2px;
+    opacity: 0.9;
+}
+
+.wall_div {
+    width: auto;
+    height: 180px;
+    background-color: #ffffff;
+    margin: 2px;
+    opacity: 0.9;
+
+}
+
+.wall_img {
+    width: auto;
+    height: 158px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+
+#ico {
+    width: 60px;
+    height: 60px;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+#wordtite {
+    width: 330px;
+    height: 40px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+}
+
+#wordtext {
+    width: 330px;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#time {
+    width: 220px;
+    height: 60px;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#tiex {
+    width: 80px;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#tiex2 {
+    width: 80px;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: flex-end;
+    margin-left: 1px;
+}
+
+
+#tiex1-2 {
+    width: 160px;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#date {
+    width: 240px;
+    height: 20px;
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#appstats {
+    width: 99vw;
+    height: 25px;
+    font-size: 25px;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    opacity: 0.9;
+    margin-top: 1px; /* 添加顶边距 */
+    border-radius: 1px; /* 添加倒角 */
+}
+
+#appstats span {
+    padding-right: 10vw; /* 添加字体右边距 */
+}
+
+#black {
+    width: 99vw;
+    font-size: 24px; /* 字体大小 */
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    opacity: 0.8;
+    margin-top: 10px; /* 添加顶边距 */
+    border-radius: 10px; /* 添加倒角 */
+    flex-wrap: wrap; /* 添加自动换行 */
+}
+
+#wordcar {
+    width: 85vw; /* 宽度 85% */
+    text-align: center; /* 内部字体居中 */
+    background-color: ghostwhite;
+    opacity: 0.9; /* 透明度 */
+    top: 15vw; /* 这里的值可以根据需要进行调整 */
+    border-radius: 30px; /* 倒角 30 像素点 */
+
+    /* 内部元素居中 */
+    display: grid;
+    place-items: center; /* 同时水平和垂直居中 */
+}
+
+#bottom {
+    height: 100px;
+}
+
+pre {
+    background-color: #000000;
+    color: #64ff5f;
+    padding: 10px;
+    border-radius: 8px; /* 倒角 30 像素点 */
+}
+
+code {
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+    color: #000000;
+    font-weight: bold; /* 字体加粗 */
+}
+
+.appico {
+    width: 50px;
+    height: 50px;
+}
+
+#mdcontainer {
+    /* 设置容器的宽度为332像素 */
+    width: 332px;
+
+    /* 设置容器的高度为80像素 */
+    height: 80px;
+
+    /* 将容器的背景颜色设置为绿色 */
+    background-color: green;
+
+    /* 在容器周围添加2像素的边距 */
+    margin: 2px;
+
+    /* 将容器的不透明度设置为0.9（90%） */
+    opacity: 0.9;
+}

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lock Screen</title>
+
+    {{ bootstrap.load_css() }}
+    {{ bootstrap.load_js() }}
+    {#  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">#}
+    <style>
+        body, html {
+            height: 100%;
+            background-image: url("{{s|wallpaper}}");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lock-dots {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .dot {
+            width: 20px;
+            height: 20px;
+            margin: 5px;
+            border: 2px solid #000;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.selected {
+            background-color: #000;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #Lock{
+            background-color: white;    /* 设置背景颜色 */
+            opacity: 0.6;       /* 设置背景透明度 */
+
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="Lock">
+    <h1 class="mt-4">Lock Screen</h1>
+    <div id="lockScreen">
+        <div class="row mt-4">
+            <div class="col text-center">
+                <div class="lock-dots" id="lockDotsContainer">
+                    <!-- 动态生成锁屏点 -->
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col text-center">
+                <button class="btn btn-primary" onclick="resetLock()">重置</button>
+            </div>
+        </div>
+    </div>
+    <div id="message" class="mt-4" style="display: none;"></div>
+</div>
+{#
+  <script src="static/js/jquery-3.5.1.slim.min.js"></script>
+  <script src="static/js/popper.min.js"></script>
+  <script src="static/js/bootstrap.min.js"></script>
+    #}
+<script>
+    // 动态生成锁屏点
+    const lockDotsContainer = document.getElementById('lockDotsContainer');
+    for (let i = 1; i <= 9; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        dot.setAttribute('data-index', i);
+        dot.addEventListener('click', () => selectDot(i));
+        lockDotsContainer.appendChild(dot);
+    }
+
+    let selectedDots = [];
+    const message = document.getElementById('message');
+
+    function selectDot(dot) {
+        if (selectedDots.indexOf(dot) === -1) {
+            selectedDots.push(dot);
+            updateLockDots();
+        }
+    }
+
+    function updateLockDots() {
+        const dots = document.querySelectorAll('.dot');
+        dots.forEach(dot => {
+            const index = parseInt(dot.getAttribute('data-index'));
+            if (selectedDots.indexOf(index) !== -1) {
+                dot.classList.add('selected');
+            } else {
+                dot.classList.remove('selected');
+            }
+        });
+        if (selectedDots.length === 4) {
+            // 将密码发送到后端
+            const password = selectedDots.join('');
+            sendPasswordToBackend(password);
+        }
+    }
+
+    function resetLock() {
+        selectedDots = [];
+        updateLockDots();
+        message.style.display = 'none';
+    }
+
+    function sendPasswordToBackend(password) {
+        // 替换为你的后端API地址
+        const endpoint = '/api/check_password';
+
+        // 使用fetch发送密码到后端验证
+        fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({password: password}),
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.isValid) {
+                    message.innerHTML = '<div class="alert alert-success">密码正确！</div>';
+                    message.style.display = 'block';
+                    window.location.href = '/start';
+                } else {
+                    message.innerHTML = '<div class="alert alert-danger">密码错误！</div>';
+                    message.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('发生错误：', error);
+            });
+    }
+</script>
+</body>
+</html>

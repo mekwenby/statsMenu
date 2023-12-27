@@ -1,0 +1,127 @@
+{% extends 'Base.html' %}
+
+{% block main %}
+    <div class="element1-2" style="background-color: rgb{{ a|color }};">
+        <div id="file-select-div">
+            <h3 id="ico">Install</h3>
+        </div>
+        <div id="tiex1-2">安装应用程序</div>
+        <input type="file" id="file-input" style="display: none;">
+    </div>
+
+    <div class="element1-2" style="background-color: rgb{{ a|color }};">
+        <div id="images-select-div">
+            <div id="ico"><img class="appico" src="static/images/4292305.png" alt="Img"></div>
+        </div>
+        <div id="tiex1-2">添加应用图标</div>
+        <input type="file" id="images-input" style="display: none;">
+    </div>
+
+    <div id="element1-2" style="background-color: rgb(255,255,255);"
+         onclick="window.location.href = '/manage_app';">
+        <div id="ico"><img class="appico" src="static/images/4541950.png" alt="Img"></div>
+        <div id="tiex1-2">管理应用</div>
+    </div>
+
+    <div id="element1-2" style="background-color: rgb{{ a|color }};"
+         onclick="window.location.href = '/Sync';">
+        <div id="ico"><img class="appico" src="static/images/5070500.png" alt="Img"></div>
+        <div id="tiex1-2">重构应用列表</div>
+    </div>
+
+    <div id="element1-2" style="background-color: rgb{{ a|color }};"
+         onclick="window.location.href = '/wallpaper';">
+        <div id="ico"><img class="appico" src="static/images/2659360.png" alt="Img"></div>
+        <div id="tiex1-2">壁纸管理</div>
+    </div>
+
+    <div id="element1-2" style="background-color: rgb{{ a|color }};"
+         onclick="window.location.href = 'static/upload/SDK.yaml';">
+        <div id="ico"><img class="appico" src="static/images/SDK.png" alt="Img"></div>
+        <div id="tiex1-2">获取SDK</div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            const fileSelectDiv = $('#file-select-div');
+            const fileInput = $('#file-input');
+
+            const imagesSelectDiv = $('#images-select-div');
+            const imagesInput = $('#images-input');
+
+            fileSelectDiv.on('click', function () {
+                fileInput.click();
+            });
+
+            imagesSelectDiv.on('click', function () {
+                imagesInput.click();
+            })
+
+
+            fileInput.on('change', function () {
+                const file = fileInput[0].files[0];
+                if (file) {
+                    const allowedExtensions = ['.yaml', '.json'];
+                    const fileExtension = file.name.split('.').pop().toLowerCase();
+
+                    if ($.inArray(`.${fileExtension}`, allowedExtensions) !== -1) {
+                        const formData = new FormData();
+                        formData.append('file', file);
+
+                        // 使用jQuery的ajax方法将文件发送到后端
+                        $.ajax({
+                            url: '/upload_app',
+                            type: 'POST',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function (response) {
+                                alert(response);
+                            },
+                            error: function () {
+                                alert('文件上传失败');
+                            }
+                        });
+                    } else {
+                        alert('只能上传后缀名为.yaml或.json的文件！');
+                    }
+                }
+            });
+
+            imagesInput.on('change', function () {
+                const file = imagesInput[0].files[0];
+                if (file) {
+                    const allowedExtensions = ['.png', '.webp'];
+                    const fileExtension = file.name.split('.').pop().toLowerCase();
+
+                    if ($.inArray(`.${fileExtension}`, allowedExtensions) !== -1) {
+                        const formData = new FormData();
+                        formData.append('file', file);
+
+                        // 使用jQuery的ajax方法将文件发送到后端
+                        $.ajax({
+                            url: '/upload_image',
+                            type: 'POST',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function (response) {
+                                alert(response);
+                            },
+                            error: function () {
+                                alert('文件上传失败');
+                            }
+                        });
+                    } else {
+                        alert('只能上传后缀名为.png或.webp的文件！');
+                    }
+                }
+            });
+
+
+        });
+    </script>
+{% endblock %}

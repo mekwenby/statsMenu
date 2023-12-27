@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+
+    {# 移动端兼容 #}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> {# 标题预留区 #}
+        {% block title %}
+            StartMenu
+        {% endblock %}
+    </title>
+
+    {{ bootstrap.load_css() }}
+    {{ bootstrap.load_js() }}
+    {# 加载自定义CSS #}
+    <link rel="stylesheet" href="/static/css/my-css.css">
+    <link rel="stylesheet" href="/static/css/startmenu.css">
+    {# 加载图标 #}
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+
+    <style>
+        .fixed-bottom {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 6vh;
+            box-shadow: 0px -3px 3px rgba(0, 0, 0, 0.5);
+            background-color: #f8f9fa;
+        }
+
+        {# 背景图片设置 #}
+        body {
+            background-image: url("{{s|wallpaper}}");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+        }
+
+        #buttons {
+            height: 6vh;
+            font-size: 5vh;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        {# 样式预留区 #}
+        {% block style %}
+        {% endblock %}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="main" class="row" style="display:flex;justify-content:center;align-items:center;">
+        {% block main %}
+        {% endblock %}
+    </div>
+
+    {# 底部Desk栏 #}
+    <div class="fixed-bottom">
+        <div class="row">
+            <div class="col" id="buttons">♪</div>
+            <div class="col" id="buttons" onclick="window.location.href = '/start';">❖</div>
+            <div class="col" id="buttons" onclick="window.history.back();">➤</div>
+        </div>
+    </div>
+
+</div>
+{# 加载自定义js和js区预留 #}
+<script src="/static/js/my-script.js"></script>
+{% block script %}
+{% endblock %}
+</body>
+</html>

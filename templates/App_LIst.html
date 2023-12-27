@@ -1,0 +1,46 @@
+{% macro applist(list) %}
+    {% if list|length > 0 %}
+        {% for app in list %}
+            {# 处理图标大小为1的 #}
+            {% if app.ico_size == 1 %}
+                <div id="element" style="background-color: rgb{{ a|color }};"
+                     onclick="window.open('{{ app.value }}')">
+
+                    {% if app.ico_genre == 'text' %}
+                        {# 处理图标为文本的 #}
+                        <div id="ico">{{ app.ico_value }}</div>
+
+                    {% elif app.ico_genre == 'image' %}
+                        {# 处理图标为图片的 #}
+                        <div id="ico"><img class="appico" src="static/images/{{ app.ico_value }}" alt="Img"></div>
+                    {% endif %}
+                    <div id="tiex">{{ app.name }}</div>
+                </div>
+
+            {% endif %}
+
+            {% if app.ico_size == 2 %}
+                <div id="element1-2" style="background-color: rgb{{ a|color }};"
+                     onclick="window.open('{{ app.value }}')">
+
+                    {% if app.ico_genre == 'text' %}
+                        {# 处理图标为文本的 #}
+                        <div id="ico">{{ app.ico_value }}</div>
+
+                    {% elif app.ico_genre == 'image' %}
+                        {# 处理图标为图片的 #}
+                        <div id="ico"><img class="appico" src="static/images/{{ app.ico_value }}" alt="Img"></div>
+                    {% endif %}
+                    <div id="tiex1-2">{{ app.name }}</div>
+                </div>
+
+            {% endif %}
+
+
+
+
+        {% endfor %}
+
+    {% endif %}
+
+{% endmacro %}

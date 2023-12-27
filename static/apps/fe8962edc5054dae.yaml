@@ -1,0 +1,14 @@
+name: Emby
+genre: link
+serial: 4
+value: 'http://203.57.230.58:38096/web/index.html'
+ico_genre: 'image'
+ico_size: 1
+ico_value: 'emby.png'
+
+# name        应用名称
+# genre       应用类型,目前只支持link
+# value       link  的值
+# ico_genre   图标类型 支持 text 和 image
+# ico_size    图标大小 支持 1 或者 2
+# ico_value   图标的值 支持文本或者 图标名称

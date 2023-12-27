@@ -1,0 +1,36 @@
+{% extends 'Base.html' %}
+
+{% block main %}
+
+    {% if app_list|length > 0 %}
+
+        {% for app in app_list %}
+            <div class="manege_app" style="background-color: rgb{{ a|color }};">
+                <div class="manage_app_info">AppName:{{ app.name }}|File:{{ app.file }}</div>
+                <div class="manage_app_info">
+                    Genre:{{ app.genre }}|icoGenre:{{ app.ico_genre }}|icoValue:{{ app.ico_value }}</div>
+                <div class="manage_app_info">Serial:{{ app.serial }}</div>
+                <div class="manage_app_info">
+                    <a href="/del_app?file={{ app.file }}"
+                       style="background-color: white;color: black;margin-right: 10px">卸载</a>
+                    <a href="/get_app?file={{ app.file }}"
+                       style="background-color: white;color: black;margin-right: 10px">导出</a>
+                </div>
+
+            </div>
+
+            <div style="width: auto; height: 20vw">
+                <br>
+            </div>
+        {% endfor %}
+
+
+    {% endif %}
+
+
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

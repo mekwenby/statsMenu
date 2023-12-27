@@ -1,0 +1,47 @@
+{% extends 'Base.html' %}
+
+{% block main %}
+    <div class="row"><h3>翻译工具</h3></div>
+    <textarea class="form-control" id="description" name="source" rows="5" required=""
+              autocomplete="off" placeholder="原文......"></textarea>
+
+    <select class="form-control" id="module" name="mode" required="" style="margin: 10px">
+        <option value="ze">中译英</option>
+        <option value="ez">英译中</option>
+        <option value="jz">日译中</option>
+        <option value="zj">中译日</option>
+    </select>
+
+    <textarea class="form-control" id="output" rows="5" name="output" autocomplete="off"></textarea>
+
+    <button type="button" class="btn btn-primary" style="margin: 10px" id="translateButton">开始翻译</button>
+
+{% endblock %}
+
+
+{% block script %}
+    <script>
+    $(document).ready(function() {
+        // 监听输入框的键盘按下事件
+        $("#description").keydown(function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault(); // 阻止默认回车行为
+                $("#translateButton").click(); // 模拟点击翻译按钮
+            }
+        });
+
+        $("#translateButton").click(function() {
+            var sourceText = $("#description").val();
+            var translationMode = $("#module").val();
+
+            $.post("/translate", { source: sourceText, mode: translationMode }, function(data) {
+                var translatedText = data.trans_result[0].dst;
+                $("#output").val(translatedText);
+            });
+        });
+    });
+</script>
+
+{% endblock %}
+
+

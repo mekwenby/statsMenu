@@ -1,0 +1,21 @@
+{% extends 'Base.html' %}
+
+
+{% block style %}
+
+{% endblock %}
+{% block main %}
+    <div class="container"
+         style="background-color: rgb{{ a|color }};border-radius: 10px;opacity: 0.9; margin:10px; text-align: center;">
+        <h1>{{ filename }}</h1>
+
+    </div>
+    <div class="container" style="background-color: white;border-radius: 10px;opacity: 0.8; margin:3px">
+        <hr style="color: black;">
+        {{ md|safe }}
+    </div>
+
+    {% include 'Bottom_placeholder_block.html' %}   {# 引入HTML片段 #}
+
+
+{% endblock %}

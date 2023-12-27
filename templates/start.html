@@ -1,0 +1,83 @@
+{% extends 'Base.html' %}
+
+
+{% block style %}
+
+{% endblock %}
+
+{% block main %}
+    <div class="container" style="display:flex;justify-content:center;align-items:center;">
+        <div class="row" id="row">
+
+            <div id="element1-3" style="background-color: rgb{{ a|color }};">
+                {# 显示时间和日期 #}
+                <div id="ico">
+                    <div id="time"></div>
+                </div>
+                <div id="date">
+
+                </div>
+            </div>
+
+            <div id="element" style="background-color: rgb{{ a|color }};">
+                <div class="load" id="tiex2">None</div>
+                <div class="mem" id="tiex2">None</div>
+                <div class="cpu" id="tiex2">None</div>
+                <div id="tiex">系统状态</div>
+            </div>
+
+            <div style="width: 332px; height: 80px; margin: 2px; background-color: #f8f9fa">
+                <canvas id="sysStatsChart"></canvas>
+            </div>
+
+            {% import 'App_LIst.html' as app_list_html %}
+            {{ app_list_html.applist(app_list) }}
+
+<div id="element" style="background-color: rgb{{ a|color }};"
+                 onclick="window.location.href = 'markdown/manage';">
+                <div id="ico"><img class="appico" src="/static/images/markdown.png" alt="S"></div>
+                <div id="tiex"> MarkDown</div>
+            </div>
+
+            <div id="element" style="background-color: rgb{{ a|color }};" onclick="window.location.href = '/lock';">
+                <div id="ico"><img class="appico" src="/static/images/lock.png" alt="S"></div>
+                <div id="tiex">锁屏</div>
+            </div>
+
+            
+
+            <div id="element" style="background-color: rgb{{ a|color }};" onclick="window.location.href = '/Set';">
+                <div id="ico"><img class="appico" src="/static/images/set.png" alt="S"></div>
+                <div id="tiex">设置</div>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="/static/js/chart.js"></script>
+    <script src="/static/js/stats.js"></script>
+    <script>
+        // 定义一个函数来获取数据并更新页面内容
+        function fetchDataAndUpdate() {
+            $.get('/api/get_sys_stats', function (data) {
+                $('.load').text('load:' + data.load)
+                $('.mem').text('mem:' + data.memusage + '%')
+                $('.cpu').text('cpu:' + data.cpuusage + '%')
+            })
+                .fail(function () {
+                    console.log('get_sys_stats err!')
+                });
+        }
+
+        // 页面加载后立即获取数据并更新内容
+        fetchDataAndUpdate();
+
+        // 设置定时器，每隔一段时间获取最新数据并更新内容
+        setInterval(fetchDataAndUpdate, 3000); // 这里设置为每隔3秒刷新一次
+    </script>
+{% endblock %}
+

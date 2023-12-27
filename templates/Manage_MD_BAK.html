@@ -1,0 +1,124 @@
+{% extends 'Base.html' %}
+
+
+{% block main %}
+    <div class="container">
+
+
+        <div class="col" id="black">
+
+
+            {% if filelist|length > 0 %}
+                {% for word in filelist %}
+                    <div id="mdcontainer" style="background-color: rgb{{ a|color }};"
+                         onclick="window.location.href = '/markdown/view?file={{ word }}';">
+                        <h1></h1>
+                        <h5>{{ word }}</h5>
+
+                        <h6><a href="/markdown/edit?file={{ word }}">编辑</a>|<a
+                                href="/markdown/del?file={{ word }}">删除</a></h6>
+
+                    </div>
+
+
+                {% endfor %}
+            {% endif %}
+            <div class="element1-4" style="background-color: rgb{{ a|color }};">
+                <div id="file-select-div">
+                    <div id="ico"><img class="appico" src="/static/images/MD.png" alt="Img"></div>
+                </div>
+                <div id="tiex1-2">markdown</div>
+                <input type="file" id="file-input" style="display: none;">
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            const fileSelectDiv = $('#file-select-div');
+            const fileInput = $('#file-input');
+
+            const imagesSelectDiv = $('#images-select-div');
+            const imagesInput = $('#images-input');
+
+            fileSelectDiv.on('click', function () {
+                fileInput.click();
+            });
+
+            imagesSelectDiv.on('click', function () {
+                imagesInput.click();
+            })
+
+
+            fileInput.on('change', function () {
+                const file = fileInput[0].files[0];
+                if (file) {
+                    const allowedExtensions = ['.md'];
+                    const fileExtension = file.name.split('.').pop().toLowerCase();
+
+                    if ($.inArray(`.${fileExtension}`, allowedExtensions) !== -1) {
+                        const formData = new FormData();
+                        formData.append('file', file);
+
+                        // 使用jQuery的ajax方法将文件发送到后端
+                        $.ajax({
+                            url: '/upload_md',
+                            type: 'POST',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function (response) {
+                                alert(response);
+                            },
+                            error: function () {
+                                alert('文件上传失败');
+                            }
+                        });
+                    } else {
+                        alert('只能上传后缀名为.md的文件！');
+                    }
+                }
+            });
+
+            imagesInput.on('change', function () {
+                const file = imagesInput[0].files[0];
+                if (file) {
+                    const allowedExtensions = ['.png', '.webp'];
+                    const fileExtension = file.name.split('.').pop().toLowerCase();
+
+                    if ($.inArray(`.${fileExtension}`, allowedExtensions) !== -1) {
+                        const formData = new FormData();
+                        formData.append('file', file);
+
+                        // 使用jQuery的ajax方法将文件发送到后端
+                        $.ajax({
+                            url: '/upload_image',
+                            type: 'POST',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function (response) {
+                                alert(response);
+                            },
+                            error: function () {
+                                alert('文件上传失败');
+                            }
+                        });
+                    } else {
+                        alert('只能上传后缀名为.png或.webp的文件！');
+                    }
+                }
+            });
+
+
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <title>Edit Markdown</title>
+    <!-- 导入Bootstrap样式 -->
+    {{ bootstrap.load_css() }}
+    {{ bootstrap.load_js() }}
+    <!-- 导入SimpleMDE样式 -->
+    <link rel="stylesheet" href="/static/css/simplemde.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form action="/markdown/save" method="POST">
+                <input type="hidden" name="file" value="{{ filename }}">
+                <div class="form-group">
+                    <label for="markdown-editor">Markdown 编辑器|建议PC端操作</label>
+                    <textarea class="form-control" name="markdown" id="markdown-editor" rows="10">{{ md }}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- 导入SimpleMDE脚本 -->
+<script src="/static/js/simplemde.min.js"></script>
+
+
+<script>
+    // 初始化SimpleMDE编辑器
+    var simplemde = new SimpleMDE({element: document.getElementById("markdown-editor")});
+</script>
+</body>
+</html>

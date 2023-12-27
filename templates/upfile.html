@@ -1,0 +1,26 @@
+<div id="element" style="background-color: rgb{{ a|color }};">
+    <div class="load" id="tiex2">None</div>
+    <div class="mem" id="tiex2">None</div>
+    <div class="cpu" id="tiex2">None</div>
+    <div id="tiex">系统状态</div>
+</div>
+
+<script>
+    // 定义一个函数来获取数据并更新页面内容
+    function fetchDataAndUpdate() {
+        $.get('/api/get_sys_stats', function (data) {
+            $('.load').text('load:' + data.load)
+            $('.mem').text('mem:' + data.memusage + '%')
+            $('.cpu').text('cpu:' + data.cpuusage + '%')
+        })
+            .fail(function () {
+                console.log('get_sys_stats err!')
+            });
+    }
+
+    // 页面加载后立即获取数据并更新内容
+    fetchDataAndUpdate();
+
+    // 设置定时器，每隔一段时间获取最新数据并更新内容
+    setInterval(fetchDataAndUpdate, 3000); // 这里设置为每隔3秒刷新一次
+</script>

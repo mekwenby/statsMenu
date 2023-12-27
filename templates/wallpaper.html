@@ -1,0 +1,122 @@
+{% extends 'Base.html' %}
+
+{% block main %}
+
+
+
+
+    {% for wallpaper in wallpaper_list %}
+        <div class="wall_div" style="border: 3px;">
+            <img class="wall_img" src="static/wallpaper/{{ wallpaper }}" alt="No">
+            <div id="tiex" style="width: auto"><a href="/set_wallpaper/{{ wallpaper }}">设置</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a
+                    href="/del_wallpaper/{{ wallpaper }}">删除</a></div>
+        </div>
+
+    {% endfor %}
+    <div style="width: 100vw"></div>
+    <div class="element1-2" style="background-color: rgb{{ a|color }};">
+        <div id="images-select-div">
+            <div id="ico"><img class="appico" src="static/images/5175601.png" alt="Img"></div>
+        </div>
+        <div id="tiex1-2">上传壁纸</div>
+        <input type="file" id="images-input" style="display: none;">
+    </div>
+
+    <div class="element1-2" style="background-color: rgb{{ a|color }};" onclick="window.location.href='set_wallpaper/REC'">
+        <div id="ico"><img class="appico" src="static/images/REC.png" alt="Img"></div>
+        <div id="tiex1-2">恢复壁纸轮询</div>
+
+    </div>
+
+    <div style="margin: 100px"></div>
+
+
+
+
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            const fileSelectDiv = $('#file-select-div');
+            const fileInput = $('#file-input');
+
+            const imagesSelectDiv = $('#images-select-div');
+            const imagesInput = $('#images-input');
+
+            fileSelectDiv.on('click', function () {
+                fileInput.click();
+            });
+
+            imagesSelectDiv.on('click', function () {
+                imagesInput.click();
+            })
+
+
+            fileInput.on('change', function () {
+                const file = fileInput[0].files[0];
+                if (file) {
+                    const allowedExtensions = ['.yaml', '.json'];
+                    const fileExtension = file.name.split('.').pop().toLowerCase();
+
+                    if ($.inArray(`.${fileExtension}`, allowedExtensions) !== -1) {
+                        const formData = new FormData();
+                        formData.append('file', file);
+
+                        // 使用jQuery的ajax方法将文件发送到后端
+                        $.ajax({
+                            url: '/upload_app',
+                            type: 'POST',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function (response) {
+                                alert(response);
+                            },
+                            error: function () {
+                                alert('文件上传失败');
+                            }
+                        });
+                    } else {
+                        alert('只能上传后缀名为.yaml或.json的文件！');
+                    }
+                }
+            });
+
+            imagesInput.on('change', function () {
+                const file = imagesInput[0].files[0];
+                if (file) {
+                    const allowedExtensions = ['.png', '.webp', '.jpg'];
+                    const fileExtension = file.name.split('.').pop().toLowerCase();
+
+                    if ($.inArray(`.${fileExtension}`, allowedExtensions) !== -1) {
+                        const formData = new FormData();
+                        formData.append('file', file);
+
+                        // 使用jQuery的ajax方法将文件发送到后端
+                        $.ajax({
+                            url: '/upload_wallpaper',
+                            type: 'POST',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function (response) {
+                                alert(response);
+                                location.reload(); // 刷新页面
+                            },
+                            error: function () {
+                                alert('文件上传失败');
+                            }
+
+                        });
+                    } else {
+                        alert('只能上传后缀名为.png或.webp的文件！');
+                    }
+                }
+            });
+
+
+        });
+    </script>
+{% endblock %}
