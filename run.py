@@ -31,6 +31,6 @@ def run(MULTI_PROCESS):
 
 if __name__ == "__main__":
     # 单进程 + 协程 适应 Windows
-    # run(False)
+    run(False)
     # 多进程 + 协程 适应 Linux
-    run(True)
+    # run(True)
