@@ -1,9 +1,9 @@
 # statsMenu
 ### NAS开始页
 
-![PC](static\tmp\Screenshot 2023-12-28 104718.png)
+![PC](static/tmp/Screenshot 2023-12-28 104718.png)
 
-![移动端](static\tmp\20231228105102.jpg)
+![移动端](static/tmp/20231228105102.jpg)
 
 ### 它能做什么?
 
