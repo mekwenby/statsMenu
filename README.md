@@ -1,5 +1,10 @@
 # statsMenu
 ### NAS开始页
+
+![PC](static\tmp\Screenshot 2023-12-28 104718.png)
+
+![移动端](static\tmp\20231228105102.jpg)
+
 ### 它能做什么?
 
 ###### 书签管理
@@ -77,3 +82,38 @@ Baidu_Translate_appkey: '*************_qD'
 Lock_screen_password: '1324'	# 锁屏密码
 Password_validity_period: 86400	# 过期时间
 ```
+
+### 添加书签
+
+通过 设置-获取SDK 下载书签模板并编辑
+
+```yaml
+name: Youtube
+genre: link
+serial: 2
+value: 'https://www.youtube.com/'
+ico_genre: 'image'
+ico_size: 1
+ico_value: '174883.png'
+
+# name        应用名称
+# genre       应用类型,目前只支持link
+# value       link  的值
+# ico_genre   图标类型 支持 text 和 image
+# ico_size    图标大小 支持 1 或者 2
+# ico_value   图标的值 支持文本或者 图标名称
+```
+
+通过 设置-添加应用图标 上传书签图标
+
+通过 设置-安装应用程序 上传编辑后的.yaml 文件 并重构应用列表
+
+### 以后会做什么?
+
+SSH登录工具
+
+远程下载
+
+文件管理
+
+自动任务
